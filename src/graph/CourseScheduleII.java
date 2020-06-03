@@ -1,30 +1,29 @@
 package graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CourseSchedule {
-	/*
-    use topological sort / dfs to check cycle
-    */
-    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+public class CourseScheduleII {
+	static int index = 0;
+    public static int[] findOrder(int numCourses, int[][] prerequisites) {
         // step1: build adjacency list
         Map<Integer, List<Integer>> adjacencyList = getAdjacencyList(prerequisites);
         
         // step2: try to use dfs to check if contains cycle
+        int[] res = new int[numCourses];
+        CourseScheduleII.index = numCourses - 1;
         boolean[] visited = new boolean[numCourses];
         for (int i = 0; i < numCourses; i++){
             if (!visited[i]){
                 boolean[] visiting = new boolean[numCourses];
-                if (containsCycle(i, adjacencyList, visited, visiting)){
-                    return false;
+                if (findOrderHelper(i, adjacencyList, visited, visiting, res)){
+                    return new int[]{};
                 }
             }
         }
-        return true;
+        return res;
     }
     
     private static Map<Integer, List<Integer>> getAdjacencyList(int[][] prerequisites){
@@ -39,7 +38,7 @@ public class CourseSchedule {
         return res;
     }
     
-    private static boolean containsCycle(int cur, Map<Integer, List<Integer>> adjacencyList, boolean[] visited, boolean[] visiting){
+    private static boolean findOrderHelper(int cur, Map<Integer, List<Integer>> adjacencyList, boolean[] visited, boolean[] visiting, int[] res){
         // mark as visiting
         if (visiting[cur]){
             return true;
@@ -49,7 +48,7 @@ public class CourseSchedule {
             // loop through children
             for (int next : adjacencyList.get(cur)){
                 if (!visited[next]){
-                    if (containsCycle(next, adjacencyList, visited, visiting)){
+                    if (findOrderHelper(next, adjacencyList, visited, visiting, res)){
                         return true;
                     }
                 }
@@ -57,15 +56,17 @@ public class CourseSchedule {
         }
         // mark as visited
         visited[cur] = true;
+        res[CourseScheduleII.index] = cur;
+        CourseScheduleII.index--;
         return false;
     }
-    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int numCourses = 2;	
-		int[][] prerequisites = {{1, 0}};
-		boolean res = canFinish(numCourses, prerequisites);
+		int numCourses = 2;
+		int[][] prerequisites = {{0,1},{1,0}};
+		int[] res = findOrder(numCourses, prerequisites);
 		System.out.println(res);
+
 	}
 
 }
