@@ -61,6 +61,7 @@ public class CourseScheduleII1 {
         }
     }
     
+    // bc I want to return objects of different type
     private Entry getAdjacencyListAndIndegree(int numCourses, int[][] prerequisites){
         Map<Integer, List<Integer>> adjacencyList = new HashMap<>();
         int[] indegree = new int[numCourses];

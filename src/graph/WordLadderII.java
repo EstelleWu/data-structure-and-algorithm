@@ -110,7 +110,8 @@ public class WordLadderII {
 	private static void constructPath(String curWord, String beginWord, Map<String, List<String>> parentMap, List<String> curRes, List<List<String>> res) {
 		// TODO Auto-generated method stub
     	if (curWord.equals(beginWord)) {
-    		// Collections.reverse(curRes);
+    		// have to create a deep copy of curRes
+    		// curRes is a parameter in the func, would be modified frequently
     		res.add(new ArrayList<>(curRes));
     		return;
     	}
