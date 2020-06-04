@@ -1,4 +1,4 @@
-package string;
+package arrays_and_string;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class Group_Anagrams {
 
+	// use alphabet array to encode for each string
 	public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         for (String str : strs) {
