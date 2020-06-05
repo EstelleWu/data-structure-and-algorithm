@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Group_Anagrams {
+public class GroupAnagrams {
 
 	// use alphabet array to encode for each string
 	public static List<List<String>> groupAnagrams(String[] strs) {

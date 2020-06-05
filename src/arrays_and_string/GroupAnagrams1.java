@@ -9,7 +9,7 @@ import java.util.List;
  * sort string
  * string -> char array -> sort char array -> sorted string
  * */
-public class groupAnagrams1 {
+public class GroupAnagrams1 {
 	public List<List<String>> groupAnagrams(String[] strs) {
         HashMap<String, List<String>> map = new HashMap<>();
         for (String s: strs){

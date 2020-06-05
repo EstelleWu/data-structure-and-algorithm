@@ -4,49 +4,31 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class TrappingRainWater1 {
-	public static int trap(int[] height) {
-        if (height == null || height.length < 3){
-            return 0;
-        }
-        
-        // step1: find the first left bar
-        int leftIndex = 0;
-        for (int i = 0; i < height.length; i++){
-            if (height[i] > 0){
-                leftIndex = i;
-                break;
-            }
-        }
-        
-        // step2: monotonic stack
-        int res = 0;
+	/*
+    monotonic stack, pop when the current bar is higher than its previous bar
+    */
+    public static int trap(int[] height) {
+        // store index in stack
         Deque<Integer> stack = new ArrayDeque<>();
-        int leftBar = height[leftIndex];
-        stack.addLast(leftBar);
-        for (int i = leftIndex + 1; i < height.length; i++){
-            int currentBar = height[i];
-            // poll
-            if (stack.size() > 0 && currentBar < stack.peekLast()){
-            	int rightBar = stack.pollLast();
-                while (stack.size() > 0 && rightBar > stack.peekLast()){
-                    int temp = stack.pollLast();
-                    res += Math.min(rightBar, leftBar) - temp;
+        int res = 0;
+        for (int rightIndex = 0; rightIndex < height.length; rightIndex++){
+            while (stack.size() > 0 && height[stack.peekLast()] < height[rightIndex]){
+                int bottomIndex = stack.pollLast();
+                // no left bar to bound
+                if (stack.size() == 0){
+                    break;
                 }
-                leftBar = rightBar;
-                stack.addLast(currentBar);
+                int leftIndex = stack.peekLast();
+                int water = (rightIndex - leftIndex - 1) * (Math.min(height[rightIndex], height[leftIndex]) - height[bottomIndex]);
+                res += water;
             }
-            
-            // add
-            if (currentBar < leftBar){
-                stack.addLast(currentBar);
-            }
-            
+            stack.addLast(rightIndex);
         }
         return res;
     }
 	
 	public static void main(String[] args) {
-		int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
+		int[] height = {1,2,3,4,5};
 		int res = trap(height);
 		System.out.println(res);
 
