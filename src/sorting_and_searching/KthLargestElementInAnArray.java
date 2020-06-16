@@ -1,4 +1,4 @@
-package sorting;
+package sorting_and_searching;
 
 public class KthLargestElementInAnArray {
 	public static int partition(int[] nums, int low, int high){

@@ -11,17 +11,17 @@ import java.util.Map;
 import java.util.Stack;
 
 public class Copy_List_with_Random_Pointer {
-//	class Node {
-//	    int val;
-//	    Node next;
-//	    Node random;
-//
-//	    Node(int val) {
-//	        this.val = val;
-//	        this.next = null;
-//	        this.random = null;
-//	    }
-//	}
+	static class Node {
+	    int val;
+	    Node next;
+	    Node random;
+
+	    Node(int val) {
+	        this.val = val;
+	        this.next = null;
+	        this.random = null;
+	    }
+	}
 	
 	public static void helper(Node head){
         Node temp = head;
