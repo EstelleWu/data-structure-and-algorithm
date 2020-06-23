@@ -37,7 +37,19 @@ public class MakingFileNamesUnique {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] input = {"gta","gta(1)","gta","avalon"};
+		//                    gta, gta(1)
+		// String[] input = {"gta","gta","avalon"};
+		
+		//                   gta, gta(1), gta(1)(1)
+		String[] input = {"gta","gta", "gta(1)","avalon"}; 
+		// need to store gta(1) in the map, in case there are more gta(1) in the input
+		// map, key: file name, value: next index
+		
+		
+		//                    gta, gta(1), gta(2)
+		// String[] input = {"gta","gta(1)","gta","avalon"};
+		
+
 		String[] res = getFolderNames(input);
 		System.out.println(1);
 
